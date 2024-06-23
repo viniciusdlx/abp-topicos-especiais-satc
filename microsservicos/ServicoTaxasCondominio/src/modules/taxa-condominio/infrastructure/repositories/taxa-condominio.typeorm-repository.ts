@@ -1,5 +1,4 @@
-import { Injectable } from '@nestjs/common';
-import { ExceptionsHandler } from '@nestjs/core/exceptions/exceptions-handler';
+import { Injectable, InternalServerErrorException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { TaxaCondominio } from '../../domain/entities/taxa-condominio.entity';
@@ -22,7 +21,39 @@ export class TaxaCondominioTypeOrmRepository
             return taxaCondominioCadastrado;
         } catch (error) {
             console.log('error.message -> ', error.message);
-            throw new ExceptionsHandler(error.message);
+            throw new InternalServerErrorException(error.message);
+        }
+    }
+
+    async findAll(): Promise<TaxaCondominio[]> {
+        try {
+            return await this.ormRepo.find();
+        } catch (error) {
+            throw new InternalServerErrorException(error.message);
+        }
+    }
+
+    async findById(id: number): Promise<TaxaCondominio> {
+        try {
+            return await this.ormRepo.findOne({ where: { id: id } });
+        } catch (error) {
+            throw new InternalServerErrorException(error.message);
+        }
+    }
+
+    async update(id: number, data: Partial<TaxaCondominio>): Promise<void> {
+        try {
+            await this.ormRepo.update(id, data);
+        } catch (error) {
+            throw new InternalServerErrorException(error.message);
+        }
+    }
+
+    async delete(id: number): Promise<void> {
+        try {
+            await this.ormRepo.delete(id);
+        } catch (error) {
+            throw new InternalServerErrorException(error.message);
         }
     }
 }

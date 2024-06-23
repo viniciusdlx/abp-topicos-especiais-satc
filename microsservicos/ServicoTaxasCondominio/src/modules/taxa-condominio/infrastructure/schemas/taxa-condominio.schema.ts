@@ -1,7 +1,7 @@
-import { TaxaCondominioStatus } from 'src/shared/enums/taxa-condominio-status.enum';
+import { TaxaCondominioStatusEnum } from 'src/shared/enums/taxa-condominio-status.enum';
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
-@Entity('taxa_condominio')
+@Entity('taxas_condominio')
 export class TaxaCondominioSchema {
     @PrimaryGeneratedColumn({ type: 'int' })
     id: number;
@@ -20,8 +20,8 @@ export class TaxaCondominioSchema {
 
     @Column({
         type: 'text',
-        enum: TaxaCondominioStatus,
-        default: TaxaCondominioStatus.NaoPago,
+        enum: TaxaCondominioStatusEnum,
+        default: TaxaCondominioStatusEnum.NaoPago,
     })
-    status: TaxaCondominioStatus;
+    status: TaxaCondominioStatusEnum;
 }

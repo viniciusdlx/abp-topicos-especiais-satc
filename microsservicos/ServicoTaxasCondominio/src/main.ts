@@ -8,7 +8,7 @@ async function bootstrap() {
     app.setGlobalPrefix('api');
 
     const config = new DocumentBuilder()
-        .setTitle('API de Taxa de Condomínio')
+        .setTitle('ServicoTaxaCondominio')
         .setDescription('Documentação da API de Taxa de Condomínio')
         .setVersion('1.0')
         .addTag('taxacondominio')
@@ -19,6 +19,8 @@ async function bootstrap() {
 
     const PORT = process.env.PORT || 3000;
     const HOST = process.env.HOST || '0.0.0.0';
+
+    app.enableCors();
 
     await app.listen(PORT);
     console.log(`Running on http://${HOST}:${PORT}`);

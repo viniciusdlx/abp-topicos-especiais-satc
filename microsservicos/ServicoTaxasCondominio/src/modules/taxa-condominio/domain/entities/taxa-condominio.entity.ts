@@ -1,4 +1,5 @@
-import { TaxaCondominioStatus } from 'src/shared/enums/taxa-condominio-status.enum';
+import { BadRequestException } from '@nestjs/common';
+import { TaxaCondominioStatusEnum } from 'src/shared/enums/taxa-condominio-status.enum';
 
 export class TaxaCondominio {
     id: number;
@@ -6,9 +7,16 @@ export class TaxaCondominio {
     moradorId: number;
     valor: number;
     dataVencimento: Date;
-    status: TaxaCondominioStatus;
+    status: TaxaCondominioStatusEnum;
 
     constructor(props: Partial<TaxaCondominio>) {
+        if (!props.residenciaId) {
+            throw new BadRequestException('Residencia inválida');
+        }
+        if (!props.moradorId) {
+            throw new BadRequestException('Morador inválido');
+        }
+
         this.id = props.id;
         this.residenciaId = props.residenciaId;
         this.moradorId = props.moradorId;
