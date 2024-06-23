@@ -42,17 +42,17 @@ namespace ServicoMoradores
 
         [Route("/api/[Controller]/{id}")]
         [HttpPut]
-        public IActionResult Editar(int id, EditarMoradorDTO editarPizzariaDto)
+        public IActionResult Editar(int id, EditarMoradorDTO editarMoradorDto)
         {
             try
             {
                 var morador = _servMorador.BuscarMorador(id);
 
-                morador.PrimeiroNome = editarPizzariaDto.PrimeiroNome;
-                morador.Sobrenome = editarPizzariaDto.Sobrenome;
-                morador.Email = editarPizzariaDto.Email;
-                morador.Telefone = editarPizzariaDto.Telefone;
-                morador.Inadimplente = editarPizzariaDto.Inadimplente;
+                morador.PrimeiroNome = editarMoradorDto.PrimeiroNome;
+                morador.Sobrenome = editarMoradorDto.Sobrenome;
+                morador.Email = editarMoradorDto.Email;
+                morador.Telefone = editarMoradorDto.Telefone;
+                morador.Inadimplente = editarMoradorDto.Inadimplente;
 
                 _servMorador.Editar(morador);
 

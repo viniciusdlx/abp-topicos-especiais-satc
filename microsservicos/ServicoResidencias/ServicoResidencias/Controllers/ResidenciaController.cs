@@ -26,6 +26,7 @@ namespace ServicoResidencia
                 residencia.Numero = inserirResidenciaDto.Numero;
                 residencia.Predio = inserirResidenciaDto.Predio;
                 residencia.Andar = inserirResidenciaDto.Andar;
+                residencia.MoradorAtualId = inserirResidenciaDto.MoradorAtualId;
 
                 _servResidencia.Inserir(residencia);
 
@@ -51,6 +52,7 @@ namespace ServicoResidencia
                 residencia.Numero = editarResidenciaDto.Numero;
                 residencia.Predio = editarResidenciaDto.Predio;
                 residencia.Andar = editarResidenciaDto.Andar;
+                residencia.MoradorAtualId = editarResidenciaDto.MoradorAtualId;
 
                 _servResidencia.Editar(residencia);
 
@@ -84,7 +86,7 @@ namespace ServicoResidencia
         {
             try
             {
-                var residencia = _servResidencia.BuscarResidencia(id);
+                var residencia = _servResidencia.BuscarResidenciaView(id);
 
                 return Ok(residencia);
             }
@@ -103,6 +105,22 @@ namespace ServicoResidencia
                 var listaResidencia = _servResidencia.BuscarTodos();
 
                 return Ok(listaResidencia);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+
+        [Route("/api/[Controller]/BuscarMorador/{id}")]
+        [HttpGet]
+        public IActionResult BuscarMorador(int id)
+        {
+            try
+            {
+                var morador = _servResidencia.BuscarMorador(id);
+
+                return Ok(morador);
             }
             catch (Exception e)
             {

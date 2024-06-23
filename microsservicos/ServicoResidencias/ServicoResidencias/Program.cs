@@ -16,6 +16,7 @@ builder.Services.AddDbContext<DataContext>(options =>
 );
 
 builder.Services.AddScoped<IServResidencia, ServResidencia>();
+builder.Services.AddScoped<IMoradorHelper, MoradorHelper>();
 
 var app = builder.Build();
 
