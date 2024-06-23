@@ -4,6 +4,7 @@
     {
         void Inserir(Morador morador);
         void Editar(Morador morador);
+        void EditarInadimplente(Morador morador);
         void Excluir(int id);
         Morador BuscarMorador(int id);
         List<Morador> BuscarTodos();
@@ -31,6 +32,11 @@
         {
             ValidarDadosMorador(morador);
 
+            _dataContext.SaveChanges();
+        }
+
+        public void EditarInadimplente(Morador morador)
+        {
             _dataContext.SaveChanges();
         }
 

@@ -64,6 +64,25 @@ namespace ServicoMoradores
             }
         }
 
+        [HttpPatch("/api/[Controller]/EditarInadimplente/{id}")]
+        public IActionResult EditarInadimplente(int id, EditarInadimplenteDTO editarInadimplenteDto)
+        {
+            try
+            {
+                var morador = _servMorador.BuscarMorador(id);
+
+                morador.Inadimplente = editarInadimplenteDto.Inadimplente;
+
+                _servMorador.EditarInadimplente(morador);
+
+                return Ok();
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+
         [Route("/api/[Controller]/{id}")]
         [HttpDelete]
         public IActionResult Excluir(int id)
