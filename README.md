@@ -26,11 +26,10 @@ Desenvolver um sistema de controle de condomínios que permita o cadastro de res
 - O sistema deve permitir o cadastro de taxas de condomínio.
 - O sistema deve permitir a atualização e remoção de taxas.
 
-### Transação de Troca de Morador
-- O sistema deve validar as cobranças antes de trocar um morador.
-- Se as cobranças estiverem pagas, o sistema deve permitir a alteração do nome do morador no cadastro de residência.
+### Transação entre Residência e Morador
+- O sistema deve buscar os moradores de acordo com a residência.
 
-### Operação de Cálculo de Inadimplência
+### Transação Operação de Cálculo de Inadimplência
 - O sistema deve verificar quais moradores possuem cobranças não quitadas e marcá-los como inadimplentes.
 
 ## Descritivo Técnico
