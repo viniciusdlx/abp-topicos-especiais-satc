@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { TaxaCondominio } from '../../domain/entities/taxa-condominio.entity';
 import { CadastroTaxaCondominioDto } from '../../presentation/dtos/cadastro-taxa-condominio.dto';
 import { EditarTaxaCondominioDto } from '../../presentation/dtos/editar-taxa-condominio.dto';
+import { BuscarNaoPagasTaxaCondominioUseCase } from '../use-cases/buscar-nao-pagas-taxa-condominio.use-case';
 import { BuscarTaxaCondominioUseCase } from '../use-cases/buscar-taxa-condominio.use-case';
 import { BuscarTodosTaxaCondominioUseCase } from '../use-cases/buscar-todos-taxa-condominio-use-case';
 import { CadastroTaxaCondominioUseCase } from '../use-cases/cadastro-taxa-condominio.use-case';
@@ -14,6 +15,7 @@ export class TaxaCondominioService {
         private readonly cadastroTaxaCondominioUseCase: CadastroTaxaCondominioUseCase,
         private readonly buscarTodosTaxaCondominioUseCase: BuscarTodosTaxaCondominioUseCase,
         private readonly buscarTaxaCondominioUseCase: BuscarTaxaCondominioUseCase,
+        private readonly buscarNaoPagasTaxaCondominioUseCase: BuscarNaoPagasTaxaCondominioUseCase,
         private readonly editarTaxaCondominioUseCase: EditarTaxaCondominioUseCase,
         private readonly excluirTaxaCondominioUseCase: ExcluirTaxaCondominioUseCase,
     ) {}
@@ -32,6 +34,10 @@ export class TaxaCondominioService {
 
     async buscarPorId(id: number): Promise<TaxaCondominio> {
         return await this.buscarTaxaCondominioUseCase.execute(id);
+    }
+
+    async buscarNaoPagas(): Promise<TaxaCondominio[]> {
+        return await this.buscarNaoPagasTaxaCondominioUseCase.execute();
     }
 
     async editar(id: number, data: EditarTaxaCondominioDto): Promise<void> {

@@ -1,5 +1,6 @@
 import { Injectable, InternalServerErrorException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { TaxaCondominioStatusEnum } from 'src/shared/enums/taxa-condominio-status.enum';
 import { Repository } from 'typeorm';
 import { TaxaCondominio } from '../../domain/entities/taxa-condominio.entity';
 import { ITaxaCondominioRepository } from '../../domain/interfaces/taxa-condominio.repository.interface';
@@ -36,6 +37,16 @@ export class TaxaCondominioTypeOrmRepository
     async findById(id: number): Promise<TaxaCondominio> {
         try {
             return await this.ormRepo.findOne({ where: { id: id } });
+        } catch (error) {
+            throw new InternalServerErrorException(error.message);
+        }
+    }
+
+    async findUnpaid(): Promise<TaxaCondominio[]> {
+        try {
+            return await this.ormRepo.find({
+                where: { status: TaxaCondominioStatusEnum.NaoPago },
+            });
         } catch (error) {
             throw new InternalServerErrorException(error.message);
         }

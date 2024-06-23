@@ -2,6 +2,7 @@ import { HttpModule } from '@nestjs/axios';
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { TaxaCondominioService } from './application/services/taxa-condominio.service';
+import { BuscarNaoPagasTaxaCondominioUseCase } from './application/use-cases/buscar-nao-pagas-taxa-condominio.use-case';
 import { BuscarTaxaCondominioUseCase } from './application/use-cases/buscar-taxa-condominio.use-case';
 import { BuscarTodosTaxaCondominioUseCase } from './application/use-cases/buscar-todos-taxa-condominio-use-case';
 import { CadastroTaxaCondominioUseCase } from './application/use-cases/cadastro-taxa-condominio.use-case';
@@ -32,6 +33,7 @@ export const ITaxaCondominioRepository = {
         BuscarTaxaCondominioUseCase,
         EditarTaxaCondominioUseCase,
         ExcluirTaxaCondominioUseCase,
+        BuscarNaoPagasTaxaCondominioUseCase,
     ],
 })
 export class TaxaCondominioModule {}

@@ -73,6 +73,29 @@ export class TaxaCondominioController {
         }
     }
 
+    @ApiOperation({ summary: 'Buscar todas as taxas de condomínio não pagas' })
+    @ApiResponse({
+        status: 200,
+        description:
+            'Listagem de taxas de condomínio não pagas retornada com sucesso',
+    })
+    @ApiBadRequestResponse({
+        description: 'Erro ao buscar as taxas de condomínio não pagas',
+    })
+    @Get('nao-pagas')
+    async findUnpaid(@Res() res: Response) {
+        try {
+            const taxaCondominioNaoPagas =
+                await this.taxaCondominioService.buscarNaoPagas();
+            return res.status(HttpStatus.OK).json(taxaCondominioNaoPagas);
+        } catch (error) {
+            return res.status(HttpStatus.BAD_REQUEST).json({
+                statusCode: HttpStatus.BAD_REQUEST,
+                message: error.message,
+            });
+        }
+    }
+
     @ApiOperation({ summary: 'Buscar taxa de condomínio por ID' })
     @ApiResponse({
         status: 200,

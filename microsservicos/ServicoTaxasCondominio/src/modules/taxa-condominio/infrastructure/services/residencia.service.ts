@@ -11,10 +11,7 @@ export class ResidenciaService {
         try {
             const url = `${environment.urlResidencia}/residencia/${id}`;
 
-            console.log('url -> ', url);
-
             const req = await this.axios.axiosRef.get(url);
-            // console.log('req -> ', req);
 
             const data = req.data as Residencia;
 
