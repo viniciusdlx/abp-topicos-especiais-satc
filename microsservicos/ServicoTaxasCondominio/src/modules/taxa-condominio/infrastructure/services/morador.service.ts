@@ -23,15 +23,28 @@ export class MoradorService {
         }
     }
 
+    async findAll(): Promise<Morador[]> {
+        try {
+            const url = `${environment.urlMorador}/morador`;
+
+            const req = await this.axios.axiosRef.get(url);
+
+            const data = req.data as Morador[];
+
+            return data;
+        } catch (error) {
+            console.log('error.message -> ', error.message);
+            throw new Error(error.message);
+        }
+    }
+
     async update(id: number, data: MoradorInadimplenteDto): Promise<void> {
         try {
-            const url = `${environment.urlMorador}/morador/${id}`;
+            const url = `${environment.urlMorador}/morador/editarinadimplente/${id}`;
 
-            const req = await this.axios.axiosRef.put(url, {
+            await this.axios.axiosRef.patch(url, {
                 inadimplente: data.inadimplente,
             });
-
-            console.log('req -> ', req);
         } catch (error) {
             console.log('error.message -> ', error.message);
             throw new Error(error.message);

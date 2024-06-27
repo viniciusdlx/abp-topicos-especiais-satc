@@ -14,7 +14,26 @@ export class BuscarNaoPagasTaxaCondominioUseCase {
         try {
             const tcInadimplentes = await this.taxaCondominioRepo.findUnpaid();
 
-            console.log('tcInadimplentes -> ', tcInadimplentes);
+            const moradores = await this.moradorService.findAll();
+
+            // verifica se o tamanho de taxas inadimplentes é maior que 0
+            if (tcInadimplentes.length > 0) {
+                // faz um for dos inadimplentes no array
+                for (const inadimplente of tcInadimplentes) {
+                    // faz um for dos moradores do microsserviço
+                    for (const morador of moradores) {
+                        // se o morador não estiver inadimplente, atualiza como inadimplente pois não está pago a taxa
+                        if (!morador.inadimplente) {
+                            await this.moradorService.update(
+                                inadimplente.moradorId,
+                                {
+                                    inadimplente: true,
+                                },
+                            );
+                        }
+                    }
+                }
+            }
 
             return tcInadimplentes;
         } catch (error) {
