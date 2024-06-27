@@ -46,14 +46,14 @@ Desenvolver um sistema de controle de condomínios que permita o cadastro de res
 
 #### Microsserviço de Taxas de Condomínio
 - **Função**: Gerenciar o cadastro de taxas de condomínio, permitindo operações de CRUD.
-- **Tecnologia**: .NET 8
+- **Tecnologia**: Node.Js
 
 ### Transação e Comunicação entre Microsserviços
 - **Troca de Morador**: Implementada no Microsserviço de Taxas de Condomínio.
 - **Cálculo de Inadimplência**: Implementada no Microsserviço de Taxas de Condomínio.
 
 ## Tecnologias Utilizadas
-- Node.js para os Microsserviços de Residências, Moradores e Taxas de Condomínio.
+- C# para os Microsserviços de Residências, Moradores e Node.Js para Taxas de Condomínio.
 
 ---
 
